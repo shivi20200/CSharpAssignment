@@ -25,66 +25,7 @@ namespace SIS_Module.SIS.Dao
                     connection.Open();
 
 
-                    /*                   string dropForeignKeys = @"
-                               IF EXISTS (SELECT * FROM sys.foreign_keys WHERE name = 'FK_Enrollments_Students')
-                                   ALTER TABLE Enrollments DROP CONSTRAINT FK_Enrollments_Students;
-
-                               IF EXISTS (SELECT * FROM sys.foreign_keys WHERE name = 'FK_Enrollments_Courses')
-                                   ALTER TABLE Enrollments DROP CONSTRAINT FK_Enrollments_Courses;
-
-                               IF EXISTS (SELECT * FROM sys.foreign_keys WHERE name = 'FK_Payments_Students')
-                                   ALTER TABLE Payments DROP CONSTRAINT FK_Payments_Students;";
-
-                                       using (SqlCommand command = new SqlCommand(dropForeignKeys, connection))
-                                       {
-                                           command.ExecuteNonQuery();
-                                       }
-
-                                       // Drop the Payments table first (it references Students)
-                                       string dropPaymentsTable = "IF OBJECT_ID('Payments', 'U') IS NOT NULL DROP TABLE Payments;";
-                                       using (SqlCommand command = new SqlCommand(dropPaymentsTable, connection))
-                                       {
-                                           command.ExecuteNonQuery();
-                                       }
-
-                                       // Drop the Enrollments table (it references Students and Courses)
-                                       string dropEnrollmentsTable = "IF OBJECT_ID('Enrollments', 'U') IS NOT NULL DROP TABLE Enrollments;";
-                                       using (SqlCommand command = new SqlCommand(dropEnrollmentsTable, connection))
-                                       {
-                                           command.ExecuteNonQuery();
-                                       }
-
-                                       // Drop the Teachers table (no foreign keys)
-                                       string dropTeachersTable = "IF OBJECT_ID('Teachers', 'U') IS NOT NULL DROP TABLE Teachers;";
-                                       using (SqlCommand command = new SqlCommand(dropTeachersTable, connection))
-                                       {
-                                           command.ExecuteNonQuery();
-                                       }
-
-                                       // Drop the Courses table (it does not have any foreign keys)
-                                       string dropCoursesTable = "IF OBJECT_ID('Courses', 'U') IS NOT NULL DROP TABLE Courses;";
-                                       using (SqlCommand command = new SqlCommand(dropCoursesTable, connection))
-                                       {
-                                           command.ExecuteNonQuery();
-                                       }
-
-                                       // Finally, drop the Students table
-                                       string dropStudentsTable = "IF OBJECT_ID('Students', 'U') IS NOT NULL DROP TABLE Students;";
-                                       using (SqlCommand command = new SqlCommand(dropStudentsTable, connection))
-                                       {
-                                           command.ExecuteNonQuery();
-                                       }
-                                   }
-
-                               }
-                               catch (SqlException ex)
-                               {
-                                   Console.WriteLine("An error occurred while initializing the database: " + ex.Message);
-                               }
-                           }
-                       }
-                   }
-                    */
+               
                     // Create the Students table
                     string createStudentsTable = @"
                 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Students' AND xtype='U')
